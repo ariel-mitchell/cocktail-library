@@ -2,9 +2,26 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Create an Account</title>
 </head>
 <body>
+<form method="post">
+    <label> Username
+    <input type="text" name="username">
+    </label>
 
+    <label> Password
+    <input type="password"  name="password">
+    </label>
+
+    <label>Confirm Password
+    <input type="password"  name="confirmPassword">
+    </label>
+
+    <input type="submit" class="btn btn-primary" value="Register" />
+
+
+</form>
 </body>
+
 </html>
