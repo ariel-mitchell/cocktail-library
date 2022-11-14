@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title th:text="${title}"></title>
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
 
-<h1 th:text="${title}"></h1>
+<div th:replace="fragments :: page-header"></div>
+
+<h1 th:text="${title}" class="page-title"></h1>
 <form method="post">
     <label> Username
     <input type="text" name="username">
