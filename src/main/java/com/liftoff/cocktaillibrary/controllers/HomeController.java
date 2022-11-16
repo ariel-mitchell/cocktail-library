@@ -21,8 +21,16 @@ public class HomeController {
         return "user/add-account";
     }
 
+    @GetMapping("add")
+    public String displayCreateRecipeForm(Model model){
+        model.addAttribute("title", "Create Recipe");
+        return "add";
+    }
+
     @PostMapping("add-account")
     public String processAddAccountForm(Model model) {
         return "redirect:";
     }
 }
+
+
