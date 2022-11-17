@@ -41,7 +41,7 @@ public class TagController {
             return "tags/add";
         }else{
             tagRepository.save(newTag);
-            return"redirect:";
+            return"redirect:../add";
         }
     }
 }
