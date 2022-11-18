@@ -1,16 +1,23 @@
 package com.liftoff.cocktaillibrary.models;
 
 import com.fasterxml.jackson.annotation.JsonTypeId;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.Objects;
 
-
+@MappedSuperclass
 public abstract class AbstractEntity {
-//    @Id
-//    @GeneratedValue
+
+    @Id
+    @GeneratedValue
     private int id;
 
-
+    @NotBlank(message="A name must be entered")
+    @Size(max=150, message="Name must be under 150 characters")
     private String name;
 
     public int getId() {
@@ -29,5 +36,18 @@ public abstract class AbstractEntity {
     public String toString() {
         return name;
     }
-}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractEntity that = (AbstractEntity) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+}
