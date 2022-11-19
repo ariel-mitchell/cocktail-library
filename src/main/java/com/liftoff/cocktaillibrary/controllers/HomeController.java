@@ -1,6 +1,7 @@
 package com.liftoff.cocktaillibrary.controllers;
 
 import com.liftoff.cocktaillibrary.models.IngredientType;
+import com.liftoff.cocktaillibrary.models.data.IngredientRepository;
 import com.liftoff.cocktaillibrary.models.data.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ public class HomeController {
 
     @Autowired
     private TagRepository tagRepository;
+    private IngredientRepository ingredientRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -32,8 +34,10 @@ public class HomeController {
     public String displayCreateRecipeForm(Model model){
         model.addAttribute("title", "Create Recipe");
         model.addAttribute("tags", tagRepository.findAll());
+        model.addAttribute("ingredients", ingredientRepository.findAll());
         List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
         model.addAttribute("ingredientTypes", ingredientTypes);
+
         return "add";
     }
 
