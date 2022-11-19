@@ -5,10 +5,10 @@ import com.liftoff.cocktaillibrary.models.data.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -29,10 +29,11 @@ public class HomeController {
     }
 
     @GetMapping("add")
-    public String displayCreateRecipeForm(Model model, @RequestParam("ingredientType")IngredientType ingredientTypes){
+    public String displayCreateRecipeForm(Model model){
         model.addAttribute("title", "Create Recipe");
         model.addAttribute("tags", tagRepository.findAll());
-        model.addAttribute("ingredientType", ingredientTypes);
+        List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
+        model.addAttribute("ingredientTypes", ingredientTypes);
         return "add";
     }
 
