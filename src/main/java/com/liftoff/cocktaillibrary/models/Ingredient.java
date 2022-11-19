@@ -2,23 +2,23 @@ package com.liftoff.cocktaillibrary.models;
 
 public class Ingredient extends AbstractEntity {
 
-    private  String ingredientType;
+    private  IngredientType ingredientType;
     private  String ingredientName;
     private  Double ingredientAmount;
 
     public Ingredient(){};
 
-    public Ingredient (String ingredientType, String ingredientName, Double ingredientAmount){
+    public Ingredient (IngredientType ingredientType, String ingredientName, Double ingredientAmount){
         this.ingredientType = ingredientType;
         this.ingredientName = ingredientName;
         this.ingredientAmount= ingredientAmount;
     }
 
-    public String getIngredientType() {
+    public IngredientType getIngredientType() {
         return ingredientType;
     }
 
-    public void setIngredientType(String ingredientType) {
+    public void setIngredientType(IngredientType ingredientType) {
         this.ingredientType = ingredientType;
     }
 
