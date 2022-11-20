@@ -6,17 +6,17 @@ import javax.persistence.Entity;
 public class Ingredient extends AbstractEntity {
 
     private  IngredientType ingredientType;
-    private  String ingredientAmount;
+//    private  String ingredientAmount;
 
     public Ingredient(){};
     public Ingredient(IngredientType ingredientType){
         this.ingredientType=ingredientType;
     }
 
-    public Ingredient (IngredientType ingredientType, String ingredientAmount){
-        this.ingredientType = ingredientType;
-        this.ingredientAmount= ingredientAmount;
-    }
+//    public Ingredient (IngredientType ingredientType, String ingredientAmount){
+//        this.ingredientType = ingredientType;
+//        this.ingredientAmount= ingredientAmount;
+//    }
 
     public IngredientType getIngredientType() {
         return ingredientType;
@@ -27,13 +27,13 @@ public class Ingredient extends AbstractEntity {
     }
 
 
-    public String getIngredientAmount() {
-        return ingredientAmount;
-    }
-
-    public void setIngredientAmount(String ingredientAmount) {
-        this.ingredientAmount = ingredientAmount;
-    }
+//    public String getIngredientAmount() {
+//        return ingredientAmount;
+//    }
+//
+//    public void setIngredientAmount(String ingredientAmount) {
+//        this.ingredientAmount = ingredientAmount;
+//    }
 
 
 }

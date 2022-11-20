@@ -16,6 +16,8 @@ public class HomeController {
 
     @Autowired
     private TagRepository tagRepository;
+
+    @Autowired
     private IngredientRepository ingredientRepository;
 
     @RequestMapping("")
@@ -33,8 +35,8 @@ public class HomeController {
     @GetMapping("add")
     public String displayCreateRecipeForm(Model model){
         model.addAttribute("title", "Create Recipe");
-        model.addAttribute("tags", tagRepository.findAll());
         model.addAttribute("ingredients", ingredientRepository.findAll());
+        model.addAttribute("tags", tagRepository.findAll());
         List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
         model.addAttribute("ingredientTypes", ingredientTypes);
 
