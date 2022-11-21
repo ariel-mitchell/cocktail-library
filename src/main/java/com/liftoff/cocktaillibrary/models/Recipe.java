@@ -1,7 +1,9 @@
 package com.liftoff.cocktaillibrary.models;
 
+import javax.persistence.Entity;
 import java.util.List;
 
+@Entity
 public class Recipe extends AbstractEntity {
 
     private List<Ingredient> ingredients;
