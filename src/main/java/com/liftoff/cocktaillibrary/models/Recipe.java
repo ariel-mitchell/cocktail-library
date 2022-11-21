@@ -1,13 +1,17 @@
 package com.liftoff.cocktaillibrary.models;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Recipe extends AbstractEntity {
+    @OneToMany
+    private List<Ingredient> ingredients = new ArrayList<>();
 
-    private List<Ingredient> ingredients;
-    private List<Tag> tags;
+    @OneToMany
+    private List<Tag> tags = new ArrayList<>();
 
     public Recipe (){};
 
