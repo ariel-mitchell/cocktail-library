@@ -40,9 +40,10 @@ public class HomeController {
         model.addAttribute("tags", tagRepository.findAll());
         List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
         model.addAttribute("ingredientTypes", ingredientTypes);
+
         model.addAttribute("ingredients", ingredientRepository.findAll());
 
-
+//        @RequestParam(required = false, name="ingredientType") IngredientType ingredientType)
 //        List<Ingredient> ingredients = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
 //        model.addAttribute("ingredients",ingredients);
 
