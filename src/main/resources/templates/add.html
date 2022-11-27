@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materiali ze.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>   $(document).ready(function() {
        $("#ingredientType").change(function() {
@@ -34,7 +37,7 @@
    <label th:for="ingredient">Ingredient</label>
     <div class="form-group">
         <label th:for="ingredientType">Ingredient Type</label>
-        <select id="ingredientType" onchange="ingredientTypeSelected()">
+        <select id="ingredientType" >
             <option th:each="ingredientType : ${ingredientTypes}"
                     th:text="${ingredientType.displayName}"
                     th:value="${ingredientType}"></option>
@@ -43,7 +46,8 @@
 
     <div class="form-group">
     <label th:for="ingredient">Ingredient Name</label>
-    <select name="ingredient">
+    <select id="ingredient">
+        <option>Select Ingredient Type</option>
 <!--        <option th:each="ingredient : ${ingredients}"-->
 <!--                th:text="${ingredient.name}"-->
 <!--                th:value="${ingredient.id}"></option>-->
@@ -63,6 +67,79 @@
         <a th:href="@{'/tags/add'}">Add Tag</a>
     </div>
 </form>
+<script type="text/javascript">
+<!--    $(document).ready(function) {-->
+<!--    $.ajax({-->
+<!--    url: 'getIngredientsByType',-->
+<!--    method: "GET",-->
+<!--    data {operation: 'ingredientType'},-->
+<!--    success: function (data, textStatus, jqXHR){-->
+<!--    console.log(data)-->
+<!--    let obj = $.parseJSON(data);-->
+<!--    $.each(obj, function(value){-->
+<!--    $('#ingredientType').append('<option value="' + value.id + '">' + value.name + '</option>')-->
+<!--    });-->
+<!--    $('select').formSelect();-->
+<!--    },-->
+<!--                    cache: false-->
+<!--                });-->
+
+
+<!--                $('#ingredientType').change(function () {-->
+<!--                    $('#ingredient').find('option').remove();-->
+<!--                    $('#ingredient').append('<option>Select Ingredient</option>');-->
+
+
+<!--                    let ingType = $('#ingredientType').val();-->
+<!--                    let data = {-->
+<!--                        operation: "ingredient",-->
+<!--                        id: ingType-->
+<!--                    };-->
+
+<!--                    $.ajax({-->
+<!--                        url: 'getIngredientsByType',-->
+<!--                        method: "GET",-->
+<!--                        data: data,-->
+<!--                        success: function (data, textStatus, jqXHR) {-->
+<!--                            console.log(data);-->
+<!--                            let obj = $.parseJSON(data);-->
+<!--&lt;!&ndash;                            $.each(obj, function (value) {&ndash;&gt;-->
+<!--                                $('#ingredient').append('<option value="' + value.id + '">' + value.name + '</option>')-->
+<!--                            });-->
+<!--                            $('select').formSelect();-->
+<!--                        },-->
+
+<!--                        cache: false-->
+<!--                    });-->
+<!--                });-->
+
+$(document).ready(function() {
+   $('#ingredientType').change(function () {
+   $('#ingredient').find('option').remove();
+   $('#ingredient').append('<option>Select Ingredient</option>');
+
+
+        let data = $('#ingredientType').val();
+
+      	$.ajax({
+        url : 'getIngredientsByType',
+        data : data,
+        success : function(data) {
+        	let result = JSON.parse(data);
+        	console.log(result);
+        	let (let i = 0; i < result.length; i++){
+        	  s += '<option value="' + result[i].id + '">'+ result[i].name+ '</option>';
+        	}
+        	$('#ingredient').html(s);
+        }
+      });
+
+     //reset data
+     $('#ingredient').html(s);
+
+
+   });
+</script>
 
 </body>
 

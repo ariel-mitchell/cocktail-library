@@ -24,11 +24,11 @@ public class RecipeData {
         return results;
     }
 
-    public static ArrayList<Ingredient> findByType(IngredientType ingredientType, Iterable<Ingredient> allIngredients){
+    public static ArrayList<Ingredient> findByType(String ingredientType, Iterable<Ingredient> allIngredients){
         ArrayList<Ingredient> results = new ArrayList<>();
 
         for (Ingredient ingredient: allIngredients){
-            if (ingredient.getIngredientType().toString().contains(ingredientType.toString())){
+            if (ingredient.getIngredientType().toString().contains(ingredientType)){
                 results.add(ingredient);
             }
 
