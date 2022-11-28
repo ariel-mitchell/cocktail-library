@@ -1,7 +1,9 @@
 package com.liftoff.cocktaillibrary.controllers;
 
+import com.liftoff.cocktaillibrary.models.Ingredient;
 import com.liftoff.cocktaillibrary.models.IngredientType;
 import com.liftoff.cocktaillibrary.models.Recipe;
+import com.liftoff.cocktaillibrary.models.RecipeData;
 import com.liftoff.cocktaillibrary.models.data.IngredientRepository;
 import com.liftoff.cocktaillibrary.models.data.RecipeRepository;
 import com.liftoff.cocktaillibrary.models.data.TagRepository;
@@ -48,23 +50,29 @@ public class HomeController {
     @GetMapping("add")
     public String displayCreateRecipeForm(Model model){
         model.addAttribute("title", "Create Recipe");
-        model.addAttribute("ingredients", ingredientRepository.findAll());
         model.addAttribute("tags", tagRepository.findAll());
         List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
         model.addAttribute("ingredientTypes", ingredientTypes);
+
+        model.addAttribute("ingredients", ingredientRepository.findAll());
+
+//        @RequestParam(required = false, name="ingredientType") IngredientType ingredientType)
+//        List<Ingredient> ingredients = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
+//        model.addAttribute("ingredients",ingredients);
 
         return "add";
     }
 
     @PostMapping("add")
     public String processCreateRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
-                                            Errors errors, Model model){
-        if(errors.hasErrors()){
-            model.addAttribute("title" , "Create Recipe");
+                                            Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Create Recipe");
             return "add";
         }
         recipeRepository.save(newRecipe);
-        return "redirect:";
+
+        return "redirect: add";
     }
 }
 
