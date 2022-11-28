@@ -1,10 +1,39 @@
 package com.liftoff.cocktaillibrary.models;
 
-public class Ingredient {
+import javax.persistence.Entity;
 
-    private  String ingredientType;
-    private  String ingredientName;
-    private  Double ingredientAmount;
+@Entity
+public class Ingredient extends AbstractEntity {
+
+    private  IngredientType ingredientType;
+//    private  String ingredientAmount;
+
+    public Ingredient(){};
+    public Ingredient(IngredientType ingredientType){
+        this.ingredientType=ingredientType;
+    }
+
+//    public Ingredient (IngredientType ingredientType, String ingredientAmount){
+//        this.ingredientType = ingredientType;
+//        this.ingredientAmount= ingredientAmount;
+//    }
+
+    public IngredientType getIngredientType() {
+        return ingredientType;
+    }
+
+    public void setIngredientType(IngredientType ingredientType) {
+        this.ingredientType = ingredientType;
+    }
+
+
+//    public String getIngredientAmount() {
+//        return ingredientAmount;
+//    }
+//
+//    public void setIngredientAmount(String ingredientAmount) {
+//        this.ingredientAmount = ingredientAmount;
+//    }
 
 
 }
