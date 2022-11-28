@@ -13,3 +13,8 @@ $(document).ready(function() {
              $('#ingredient').html(s);
        }
    }
+
+
+   function addAnother() {
+    return true;
+   }

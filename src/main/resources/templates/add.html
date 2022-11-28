@@ -19,8 +19,14 @@
     </label>
  </div>
 
+    <div class="form-group">
+        <button th:onclick="addAnother()">+ Add Another Ingredient</button>
+    </div>
+
+    <div><p th:if="${addAnother}">test</p></div>
+
 <div class="form-group">
-   <label th:for="ingredient">Ingredient</label>
+   <label th:for="ingredient">List of Ingredients</label>
     <div class="form-group">
         <label th:for="ingredientType">Ingredient Type</label>
         <select id="ingredientType" onchange="ingredientTypeSelected()">
@@ -28,16 +34,17 @@
                     th:text="${ingredientType.displayName}"
                     th:value="${ingredientType}"></option>
         </select>
-    </div>
 
-    <div class="form-group">
-    <label th:for="ingredient">Ingredient Name</label>
-    <select name="ingredient">
-<!--        <option th:each="ingredient : ${ingredients}"-->
-<!--                th:text="${ingredient.name}"-->
-<!--                th:value="${ingredient.id}"></option>-->
-    </select>
+        <label th:for="ingredient">Ingredient Name</label>
+        <select name="ingredient">
+            <!--        <option th:each="ingredient : ${ingredients}"-->
+            <!--                th:text="${ingredient.name}"-->
+            <!--                th:value="${ingredient.id}"></option>-->
+        </select>
     </div>
+</div>
+
+
 
 </div>
     <a th:href="@{'/custom-ingredients/add'}">Add Custom Ingredient</a>
