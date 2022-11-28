@@ -1,6 +1,7 @@
 package com.liftoff.cocktaillibrary.models;
 
 public enum IngredientType {
+//    SELECT_INGREDIENT_TYPE("Select Ingredient Type"),
     SPIRIT("Spirit"),
     LIQUEUR ("Liqueur"),
     VERMOUTH_OR_WINE ("Vermouth/Wine"),

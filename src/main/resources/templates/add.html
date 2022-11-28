@@ -5,6 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materiali ze.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script  th:inline="javascript"> let ingredients = /*[[${ingredients}]]*/ 'ingredients'; </script>
 <script>   $(document).ready(function() {
        $("#ingredientType").change(function() {
            ingredientTypeSelected();
@@ -15,12 +16,12 @@
        let s;
        for (i=0;i<ingredients.length;i++) {
            if (ingredients[i].ingredientType == selectedType) {
-               s += '<option th:text="${ingredients[i].name}" th:value="${ingredients[i].id}"></option>';
+               s +=  '<option value="' + ingredients[i].id + '">'+ ingredients[i].name+ '</option>';
              }
              $('#ingredient').html(s);
        }
    }</script>
-<script  th:inline="javascript"> let ingredients = /*[[${ingredients}]]*/ 'ingredients'; </script>
+
 <body class="container">
 
 <div th:replace="fragments :: page-header"></div>
@@ -40,14 +41,14 @@
         <select id="ingredientType" >
             <option th:each="ingredientType : ${ingredientTypes}"
                     th:text="${ingredientType.displayName}"
-                    th:value="${ingredientType}"></option>
+                    th:value="${ingredientType}">Select Ingredient Type</option>
         </select>
     </div>
 
     <div class="form-group">
     <label th:for="ingredient">Ingredient Name</label>
     <select id="ingredient">
-        <option>Select Ingredient Type</option>
+        <option>Select Ingredient</option>
 <!--        <option th:each="ingredient : ${ingredients}"-->
 <!--                th:text="${ingredient.name}"-->
 <!--                th:value="${ingredient.id}"></option>-->
@@ -139,7 +140,7 @@
 
 
 <!--   });-->
-<!--</script>-->
+</script>
 
 </body>
 

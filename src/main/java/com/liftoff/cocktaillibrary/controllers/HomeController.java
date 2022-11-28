@@ -42,30 +42,30 @@ public class HomeController {
         return "user/add-account";
     }
 
-//    public void dropdownManager(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        try (PrintWriter out = response.getWriter()) {
-//            String op = request.getParameter("operation");
-//            if (op.equals("ingredientType")) {
-//
-//                List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
-//                Gson json = new Gson();
-//                String ingTypeList = json.toJson(ingredientTypes);
-//                response.setContentType("text/html");
-//                response.getWriter().write(ingTypeList);
-//            } else if (op.equals("ingredient")) {
-//
-//
-//                model.addAttribute("ingredients", ingredientRepository.findAll());
-//                String ingredientType = request.getParameter("ingredientType");
-//                List<Ingredient> ingredients = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
-//                Gson json = new Gson();
-//                String ingredientTypeList = json.toJson(ingredients);
-//                response.setContentType("text/html");
-//                response.getWriter().write(ingredientTypeList);
-//            }
-//        }
-//
-//    }
+    public void dropdownManager(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try (PrintWriter out = response.getWriter()) {
+            String op = request.getParameter("operation");
+            if (op.equals("ingredientType")) {
+
+                List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
+                Gson json = new Gson();
+                String ingTypeList = json.toJson(ingredientTypes);
+                response.setContentType("text/html");
+                response.getWriter().write(ingTypeList);
+            } else if (op.equals("ingredient")) {
+
+
+                model.addAttribute("ingredients", ingredientRepository.findAll());
+                String ingredientType = request.getParameter("ingredientType");
+                List<Ingredient> ingredients = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
+                Gson json = new Gson();
+                String ingredientTypeList = json.toJson(ingredients);
+                response.setContentType("text/html");
+                response.getWriter().write(ingredientTypeList);
+            }
+        }
+
+    }
 
     @GetMapping("getIngredientsByType")
     public @ResponseBody String getIngredientsByType(@RequestParam String ingredientType){
