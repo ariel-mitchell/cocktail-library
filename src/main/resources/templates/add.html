@@ -17,6 +17,36 @@
     </label>
  </div>
 
+
+<!--    <div class="form-list" id="ingredientForm">-->
+<!--        <div class="form-row">-->
+<!--            <label th:for="ingredient" id="ingredient">Ingredient</label>-->
+
+<!--            <label th:for="ingredientType">Ingredient Type</label>-->
+<!--            <select id="ingredientType">-->
+<!--                <option value="">Select Ingredient Type</option>-->
+<!--                <option th:each="ingredientType : ${ingredientTypes}"-->
+<!--                        th:text="${ingredientType.displayName}"-->
+<!--                        th:value="${ingredientType}"></option>-->
+<!--            </select>-->
+
+
+<!--            <label th:for="ingredientName">Ingredient Name</label>-->
+<!--            <select id="ingredientName">-->
+<!--                <option>Select Ingredient</option>-->
+<!--            </select>-->
+
+<!--            <label th:for="ingredientAmount">Ingredient Amount</label>-->
+<!--            <select id="ingredientAmount">-->
+<!--                <option value="">Select Ingredient Amount</option>-->
+<!--&lt;!&ndash;                <option th:each="ingredientAmount : ${ingredientAmounts}"&ndash;&gt;-->
+<!--&lt;!&ndash;                        th:text="${ingredientAmount.displayName}"&ndash;&gt;-->
+<!--&lt;!&ndash;                        th:value="${ingredientAmount}">Select Ingredient Amount</option>&ndash;&gt;-->
+<!--            </select>-->
+<!--        </div>-->
+
+<!--    </div>-->
+
 <div class="form-group">
    <label th:for="ingredient">List of Ingredients</label>
     <div class="form-group">
@@ -40,9 +70,6 @@
     <div class="form-group">
         <input type="button" value="+ Add Another Ingredient" id="anotherBtn" onclick="addAnotherIngredient()"/>
     </div>
-
-
-
 
 
 </div>
