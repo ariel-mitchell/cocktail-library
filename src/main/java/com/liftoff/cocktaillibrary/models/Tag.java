@@ -13,10 +13,14 @@ public class Tag extends AbstractEntity {
 //        this.tag = tag;
 //    }
 
-
+    @ManyToMany(mappedBy="tags")
+    private final List<Recipe> recipes = new ArrayList<>();
 
     public Tag(){};
 
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
 //    public String getTag() {
 //        return tag;
 //    }
