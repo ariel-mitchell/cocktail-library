@@ -13,7 +13,7 @@
 
    });
    function repeatFormElement(current){
-    $(current).parents('.form-list').append($(current).parents('.form-row').clone(true, true));
+    $(current).parents('.form-list').append($(current).parents('.form-row').clone());
    }
 
        function ingredientTypeSelected(current) {
@@ -87,6 +87,7 @@
         </th:block>
         <a th:href="@{'/tags/add'}">Add Tag</a>
     </div>
+    <input type="submit" class="btn btn-primary" value="Add Recipe" />
 </form>
 <script type="text/javascript">
 <!--    $(document).ready(function) {-->

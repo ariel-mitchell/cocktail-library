@@ -91,6 +91,7 @@ public class HomeController {
         model.addAttribute("ingredients", ingredientRepository.findAll());
         List<IngredientAmount> ingredientAmounts = Arrays.asList(IngredientAmount.values());
         model.addAttribute("ingredientAmounts", ingredientAmounts);
+        model.addAttribute(new Recipe());
 
 //        @RequestParam(required = false, name="ingredientType") IngredientType ingredientType)
 //        List<Ingredient> ingredients = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
@@ -101,7 +102,7 @@ public class HomeController {
 
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Recipe newRecipe,
-                                    Errors errors, Model model, @RequestParam List<Ingredient> ingredients, @RequestParam ArrayList<IngredientAmount> ingredientAmounts, @RequestParam List<Tag> tags) {
+                                    Errors errors, Model model, @RequestParam List<Integer> ingredientIds, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam List<Integer> tagIds) {
 
          HashMap<Ingredient, IngredientAmount> recipeIngredients = new HashMap<>();
 
@@ -110,6 +111,9 @@ public class HomeController {
             return "add";
 
         }else{
+            List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAllById(ingredientIds);
+            List<Tag> tags = (List<Tag>) tagRepository.findAllById(tagIds);
+
             for(int i = 0; i<ingredients.size(); i++){
                 recipeIngredients.put(ingredients.get(i), ingredientAmounts.get(i));
             }
