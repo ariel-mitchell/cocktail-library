@@ -1,7 +1,3 @@
-function addAnother() {
-    alert("Do you really want to add another ingredient?");
-}
-
 $(document).ready(function() {
        $("#ingredientType").change(function() {
            ingredientTypeSelected();
@@ -17,6 +13,23 @@ $(document).ready(function() {
              $('#ingredient').html(s);
        }
    }
+
+//   $(document).ready(function() {
+//     $("#anotherBtn").click(function() {
+//     addAnotherIngredient();
+//     });
+//   });
+     function addAnotherIngredient() {
+     alert("You've clicked the button!");
+
+     let another = document.getElementById('addAnother');
+
+     let currentHTML = another.innerHTML;
+
+     let newHTML = '<p>test</p>';
+
+     another.innerHTML = currentHTML + newHTML;
+     }
 
 
 

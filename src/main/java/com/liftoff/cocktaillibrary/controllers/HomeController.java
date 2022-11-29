@@ -55,6 +55,7 @@ public class HomeController {
         model.addAttribute("ingredientTypes", ingredientTypes);
 
         model.addAttribute("ingredients", ingredientRepository.findAll());
+        model.addAttribute("addAnother", false);
 
 //        @RequestParam(required = false, name="ingredientType") IngredientType ingredientType)
 //        List<Ingredient> ingredients = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
