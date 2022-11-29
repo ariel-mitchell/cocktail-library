@@ -1,3 +1,7 @@
+function addAnother() {
+    alert("Do you really want to add another ingredient?");
+}
+
 $(document).ready(function() {
        $("#ingredientType").change(function() {
            ingredientTypeSelected();
@@ -15,6 +19,4 @@ $(document).ready(function() {
    }
 
 
-   function addAnother() {
-    return true;
-   }
+
