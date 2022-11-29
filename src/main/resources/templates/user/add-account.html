@@ -10,21 +10,21 @@
 <div class="container col-md-4 col-md-offset-4" >
 <form method="post">
   <div class="form-group">
-    <label> Username
+    <label th:for="username"> Username</label>
       <input class="form-control" type="text" name="username">
-    </label>
+
   </div>
 
   <div class="form-group">
-    <label> Password
+    <label th:for="password"> Password</label>
       <input class="form-control" type="password"  name="password">
-    </label>
+
   </div>
 
-  <div class="form-grop">
-    <label>Confirm Password
+  <div class="form-group">
+    <label th:for="confirmPassword">Confirm Password</label>
       <input class="form-control" type="password"  name="confirmPassword">
-    </label>
+
  </div>
     <input type="submit" class="btn btn-primary" value="Register" />
 </form>

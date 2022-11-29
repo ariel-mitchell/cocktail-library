@@ -8,48 +8,48 @@
 <h1 th:text="${title}" class="page-title"></h1>
 
 <div class="container col-md-4 col-md-offset-4" >
-<form method="post">
- <div class="form-group">
-    <label>Name
-        <input class="form-control" type="text" name="name" >
-    </label>
- </div>
 
-<div class="form-group">
-   <label th:for="ingredient">Ingredient</label>
-    <div class="form-group">
-        <label th:for="ingredientType">Ingredient Type</label>
-        <select name="ingredientType" class="form-control">
-            <option th:each="ingredientType : ${ingredientTypes}"
-                    th:text="${ingredientType.displayName}"
-                    th:value="${ingredientType}"></option>
-        </select>
-    </div>
+            <form method="post">
+             <div class="form-group">
+                <label th:for="name">Name</label>
+                    <input class="form-control" type="text" name="name" >
+             </div>
 
-    <div class="form-group">
-    <label th:for="ingredient">Ingredient Name</label>
-    <select name="ingredient" class="form-control">
-        <option th:each="ingredient : ${ingredients}"
-                th:text="${ingredient.name}"
-                th:value="${ingredient.id}"></option>
-    </select>
-    </div>
+            <div class="form-group">
+               <label th:for="ingredient">Ingredient</label>
+                <div class="form-group">
+                    <label th:for="ingredientType">Ingredient Type</label>
+                    <select name="ingredientType" class="form-control">
+                        <option th:each="ingredientType : ${ingredientTypes}"
+                                th:text="${ingredientType.displayName}"
+                                th:value="${ingredientType}"></option>
+                    </select>
+                </div>
 
-</div>
-    <a th:href="@{'/custom-ingredients/add'}">Add Custom Ingredient</a>
+                <div class="form-group">
+                <label th:for="ingredient">Ingredient Name</label>
+                <select name="ingredient" class="form-control">
+                    <option th:each="ingredient : ${ingredients}"
+                            th:text="${ingredient.name}"
+                            th:value="${ingredient.id}"></option>
+                </select>
+                </div>
+
+            </div>
+                <a th:href="@{'/custom-ingredients/add'}">Add Custom Ingredient</a>
 
 
-    <div class="form-group">
-        <label th:for="tags">Tags</label>
-        <th:block th:each="tag : ${tags}">
-            <input type="checkbox" name="tags" th:value="${tag.id}">
-            <label th:text="${tag.name}"></label>
-        </th:block>
-        <a th:href="@{'/tags/add'}">Add Tag</a>
-    </div>
+                <div class="form-group">
+                    <label th:for="tags">Tags</label>
+                    <th:block th:each="tag : ${tags}">
+                        <input type="checkbox" name="tags" th:value="${tag.id}">
+                        <label th:text="${tag.name}"></label>
+                    </th:block>
+                    <a th:href="@{'/tags/add'}">Add Tag</a>
+                </div>
 
-    <input type="submit" class="btn btn-primary btn-lg" value="Add Recipe" />
-</form>
+                <input type="submit" class="btn btn-primary btn-lg" value="Add Recipe" />
+            </form>
 </div>
 </body>
 </html>
