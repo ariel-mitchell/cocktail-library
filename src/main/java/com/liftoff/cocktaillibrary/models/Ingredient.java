@@ -1,12 +1,17 @@
 package com.liftoff.cocktaillibrary.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Ingredient extends AbstractEntity {
 
     private  IngredientType ingredientType;
 //    private  String ingredientAmount;
+
+
 
     public Ingredient(){};
     public Ingredient(IngredientType ingredientType){

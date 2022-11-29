@@ -1,6 +1,10 @@
 package com.liftoff.cocktaillibrary.models;
 
-    public enum IngredientAmount {
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
+
+public enum IngredientAmount {
         QAURTERPART("Quarter Part"),
         HALFPART ("Half Part"),
         ONEPART ("One Part"),
@@ -10,6 +14,8 @@ package com.liftoff.cocktaillibrary.models;
 
         private final String displayName;
 
+
+
         IngredientAmount(String displayName) {
             this.displayName = displayName;
         }
@@ -17,5 +23,7 @@ package com.liftoff.cocktaillibrary.models;
         public String getDisplayName() {
             return displayName;
         }
-    }
+
+
+}
 

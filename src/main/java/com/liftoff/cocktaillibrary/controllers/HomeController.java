@@ -2,25 +2,23 @@ package com.liftoff.cocktaillibrary.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.liftoff.cocktaillibrary.models.Ingredient;
-import com.liftoff.cocktaillibrary.models.IngredientAmount;
-import com.liftoff.cocktaillibrary.models.IngredientType;
-import com.liftoff.cocktaillibrary.models.RecipeData;
+import com.liftoff.cocktaillibrary.models.*;
 import com.liftoff.cocktaillibrary.models.data.IngredientRepository;
+import com.liftoff.cocktaillibrary.models.data.RecipeRepository;
 import com.liftoff.cocktaillibrary.models.data.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -30,6 +28,9 @@ public class HomeController {
 
     @Autowired
     private IngredientRepository ingredientRepository;
+
+    @Autowired
+    private RecipeRepository recipeRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -96,6 +97,28 @@ public class HomeController {
 //        model.addAttribute("ingredients",ingredients);
 
         return "add";
+    }
+
+    @PostMapping("add")
+    public String processAddJobForm(@ModelAttribute @Valid Recipe newRecipe,
+                                    Errors errors, Model model, @RequestParam List<Ingredient> ingredients, @RequestParam ArrayList<IngredientAmount> ingredientAmounts, @RequestParam List<Tag> tags) {
+
+         HashMap<Ingredient, IngredientAmount> recipeIngredients = new HashMap<>();
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Recipe");
+            return "add";
+
+        }else{
+            for(int i = 0; i<ingredients.size(); i++){
+                recipeIngredients.put(ingredients.get(i), ingredientAmounts.get(i));
+            }
+
+            newRecipe.setRecipeIngredients(recipeIngredients);
+            newRecipe.setTags(tags);
+        }
+        recipeRepository.save(newRecipe);
+        return "redirect:";
     }
 
 

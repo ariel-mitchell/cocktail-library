@@ -7,12 +7,17 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script  th:inline="javascript"> let ingredients = /*[[${ingredients}]]*/ 'ingredients'; </script>
 <script>   $(document).ready(function() {
-       $("#ingredientType").change(function() {
+       $(".ingredientType").change(function() {
            ingredientTypeSelected();
        });
    });
+   function repeatFormElement(current){
+    $(current).parents('.form-list').append($(current).parents('.form-row').html());
+<!--    $('.ingredientName').find('option').remove();-->
+
+   }
        function ingredientTypeSelected() {
-       let selectedType = $("#ingredientType").val();
+       let selectedType = $(".ingredientType").val();
        let s;
        for (i=0;i<ingredients.length;i++) {
            if (ingredients[i].ingredientType == selectedType) {
@@ -20,8 +25,6 @@
              }
              $('#ingredientName').html(s);
        }
-   } function repeatFormElement(current){
-    $(current).parents('.form-list').append($(current).parents('.form-row').clone());
 
    }
  </script>
@@ -44,7 +47,7 @@
             <label th:for="ingredient" id="ingredient">Ingredient</label>
 
                 <label th:for="ingredientType">Ingredient Type</label>
-                <select id="ingredientType" name >
+                <select id="ingredientType" class="ingredientType">
                     <option value="">Select Ingredient Type</option>
                     <option th:each="ingredientType : ${ingredientTypes}"
                             th:text="${ingredientType.displayName}"
@@ -52,7 +55,7 @@
                 </select>
 
 
-                <label th:for="ingredientName">Ingredient Name</label>
+                <label th:for="ingredientName" class="ingredientName">Ingredient Name</label>
                 <select id="ingredientName">
                     <option>Select Ingredient</option>
                 </select>
