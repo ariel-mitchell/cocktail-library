@@ -20,3 +20,4 @@ public enum IngredientType {
         return displayName;
     }
 }
+

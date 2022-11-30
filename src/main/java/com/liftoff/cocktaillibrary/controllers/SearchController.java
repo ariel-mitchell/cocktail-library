@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "search")
 public class SearchController {
 
+
     @Autowired
     private RecipeRepository recipeRepository;
 
@@ -20,4 +21,6 @@ public class SearchController {
             return "search";
 
     }
+
+
 }
