@@ -15,7 +15,7 @@ public class ListController {
 
     @RequestMapping("")
     public String list(Model model){
-        model.addAttribute("title", "View Recipes By Category");
+
 
         return "list-recipes";
     }
