@@ -1,5 +1,6 @@
 package com.liftoff.cocktaillibrary.controllers;
 
+
 import com.liftoff.cocktaillibrary.models.*;
 import com.liftoff.cocktaillibrary.models.data.IngredientRepository;
 import com.liftoff.cocktaillibrary.models.data.RecipeRepository;
@@ -10,9 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+
+
 import javax.validation.Valid;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+
 
 @Controller
 public class HomeController {
@@ -39,10 +44,12 @@ public class HomeController {
         return "user/add-account";
     }
 
+
     @PostMapping("add-account")
     public String processAddAccountForm(Model model) {
         return "redirect:";
     }
+
 
 
     @GetMapping("add")
@@ -53,7 +60,9 @@ public class HomeController {
         model.addAttribute("ingredientTypes", ingredientTypes);
 
         model.addAttribute("ingredients", ingredientRepository.findAll());
+
         model.addAttribute("ingredients", ingredientRepository.findAll());
+
         List<IngredientAmount> ingredientAmounts = Arrays.asList(IngredientAmount.values());
         model.addAttribute("ingredientAmounts", ingredientAmounts);
         model.addAttribute(new Recipe());
@@ -64,14 +73,31 @@ public class HomeController {
 
     @PostMapping("add")
     public String processCreateRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
-                                            Errors errors, Model model) {
+                                    Errors errors, Model model, @RequestParam List<Integer> ingredientIds,
+                                          @RequestParam List<IngredientAmount> ingredientAmounts,
+                                          @RequestParam List<Integer> tagIds) {
+
+         HashMap<Ingredient, IngredientAmount> recipeIngredients = new HashMap<>();
+
         if (errors.hasErrors()) {
             model.addAttribute("title", "Create Recipe");
             return "add";
+
+        }else{
+            List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAllById(ingredientIds);
+            List<Tag> tags = (List<Tag>) tagRepository.findAllById(tagIds);
+
+            for(int i = 0; i<ingredients.size(); i++){
+                recipeIngredients.put(ingredients.get(i), ingredientAmounts.get(i));
+            }
+
+            newRecipe.setRecipeIngredients(recipeIngredients);
+            newRecipe.setTags(tags);
         }
         recipeRepository.save(newRecipe);
         return "redirect:";
     }
+
 }
 
 
