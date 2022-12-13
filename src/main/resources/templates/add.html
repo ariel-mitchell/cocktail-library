@@ -20,6 +20,9 @@
     <div class="form-group">
         <label th:for="ingredient">List of Ingredients</label>
         <div class="form-list">
+            <div class="form-group" id="repeat-ingredient-form-button">
+                <button type="button" onclick="repeatFormElement(this)">+ Add Another Ingredient</button>
+            </div>
     <div class="form-row" id="ingredientForm">
 
                 <label th:for="ingredientType">Ingredient Type</label>
@@ -45,10 +48,9 @@
                 </select>
 
 
-            <div class="form-group">
-                <button type="button" onclick="repeatFormElement(this)">+ Add Another Ingredient</button>
-            </div>
+
     </div>
+
     </div>
     </div>
 
