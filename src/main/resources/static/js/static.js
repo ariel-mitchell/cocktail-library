@@ -1,6 +1,6 @@
 $(document).ready(function() {});
    function repeatFormElement(current){
-    $(current).parents('.form-row').append($(current).parents('.form-row').clone());
+    $(current).parents('.form-list').append($(current).parents('.form-row').clone());
    }
 
    function ingredientTypeSelected(current) {
