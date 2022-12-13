@@ -9,4 +9,4 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-    public interface TagRepository extends CrudRepository<Tag, Integer>{}
+public interface TagRepository extends CrudRepository<Tag, Integer>{}

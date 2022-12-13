@@ -10,18 +10,17 @@
 
 <h1 th:text="${title}" class="page-title"></h1>
 
-<form method="post">
+  <form method="post">
     <div class="form-group">
-        <label>Name
-            <input class="form-control" type="text" name="name" >
+        <label th:for="name">Name
+        <input class="form-control" type="text" name="name" >
         </label>
     </div>
 
     <div class="form-group">
         <label th:for="ingredient">List of Ingredients</label>
         <div class="form-list">
-    <div class="form-row" id="ingredientForm">
-
+            <div class="form-row" id="ingredientForm">
                 <label th:for="ingredientType">Ingredient Type</label>
                 <select id="ingredientType" class="ingredientType" onchange="ingredientTypeSelected(this)">
                     <option value="">Select Ingredient Type</option>
@@ -30,9 +29,8 @@
                             th:value="${ingredientType}"></option>
                 </select>
 
-
-                <label th:for="ingredientName" >Ingredient Name</label>
-                <select id="ingredientName" class="ingredientName">
+                <label th:for="ingredientName">Ingredient Name</label>
+                <select id="ingredientName">
                     <option>Select Ingredient</option>
                 </select>
 
@@ -44,12 +42,11 @@
                             th:value="${ingredientAmount}">Select Ingredient Amount</option>
                 </select>
 
-
             <div class="form-group">
                 <button type="button" onclick="repeatFormElement(this)">+ Add Another Ingredient</button>
             </div>
-    </div>
-    </div>
+            </div>
+        </div>
     </div>
 
     <a th:href="@{'/custom-ingredients/add'}">Add Custom Ingredient</a>
@@ -62,6 +59,7 @@
         </th:block>
         <a th:href="@{'/tags/add'}">Add Tag</a>
     </div>
+
     <input type="submit" class="btn btn-primary" value="Add Recipe" />
 </form>
 

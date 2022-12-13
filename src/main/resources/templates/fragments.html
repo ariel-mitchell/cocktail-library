@@ -18,10 +18,17 @@
 
 <div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
+        <button class="navbar-toggle" data-target=".navbar-responsive-collapse" data-toggle="collapse"
+        type="button">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+
+        </button>
         <div class="navbar-header">
             <a th:href="@{/}" class="navbar-brand">Cocktail Library</a>
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse navbar-responsive-collapse ">
             <ul class="nav navbar-nav">
                 <li><a th:href="@{/add}">Create Recipe</a></li>
                 <li><a th:href="@{/list-recipes}">List All</a></li>
