@@ -1,21 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
-<body class="container">
-<div th:replace="fragments :: page-header"></div>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
 
-<h1 th:text="${title}" class="page-title"></h1>
-
-<div class="container col-md-4 col-md-offset-4" >
-        <form  method = "post">
-             <div class="form-group">
-               <label th:for="searchTerm">Keyword:</label>
-               <input class="form-control" type="text" name="searchTerm" id="searchTerm" />
-             </div>
-
-                <input type="submit"class="btn btn-primary" value="Search" />
-         </form>
-
-</div>
 </body>
 </html>
