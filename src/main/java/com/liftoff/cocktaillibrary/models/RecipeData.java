@@ -15,6 +15,7 @@ public class RecipeData {
             if (recipe.getName().toLowerCase().contains(searchTerm.toLowerCase())){
                 results.add(recipe);
             }else if (recipe.getRecipeIngredients().toString().toLowerCase().contains(searchTerm.toLowerCase())) {
+
                 results.add(recipe);
             }else if (recipe.getTags().toString().toLowerCase().contains(searchTerm.toLowerCase())){
                 results.add(recipe);
@@ -35,5 +36,4 @@ public class RecipeData {
         }
         return results;
     }
-
 }
