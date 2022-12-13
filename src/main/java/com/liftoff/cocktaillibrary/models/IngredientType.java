@@ -32,4 +32,3 @@ public enum IngredientType {
         return recipes;
     }
 }
-
