@@ -14,11 +14,11 @@ import java.util.Map;
 public class Recipe extends AbstractEntity {
 
 
-@ElementCollection(targetClass = IngredientAmount.class)
-@MapKeyClass(Ingredient.class)
+    @ElementCollection(targetClass = IngredientAmount.class)
+    @MapKeyClass(Ingredient.class)
     private Map<Ingredient, IngredientAmount> recipeIngredients;
 
-@ManyToMany
+    @ManyToMany
     private List<Tag> tags;
 
 
