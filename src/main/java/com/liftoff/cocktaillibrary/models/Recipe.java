@@ -1,5 +1,10 @@
 package com.liftoff.cocktaillibrary.models;
 
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.List;
@@ -8,12 +13,14 @@ import java.util.Map;
 @Entity
 public class Recipe extends AbstractEntity {
 
-@ElementCollection(targetClass = IngredientAmount.class)
-@MapKeyClass(Ingredient.class)
+
+    @ElementCollection(targetClass = IngredientAmount.class)
+    @MapKeyClass(Ingredient.class)
     private Map<Ingredient, IngredientAmount> recipeIngredients;
 
-@ManyToMany
+    @ManyToMany
     private List<Tag> tags;
+
 
     public Recipe (){};
 
