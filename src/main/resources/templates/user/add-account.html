@@ -6,6 +6,8 @@
 <div th:replace="fragments :: page-header"></div>
 
 <h1 th:text="${title}" class="page-title"></h1>
+
+<div class="container col-md-4 col-md-offset-4">
 <form method="post">
   <div class="form-group">
     <label> Username
@@ -19,7 +21,7 @@
     </label>
   </div>
 
-  <div class="form-grop">
+  <div class="form-group">
     <label>Confirm Password
       <input class="form-control" type="password"  name="confirmPassword">
     </label>
@@ -27,6 +29,7 @@
     <input type="submit" class="btn btn-primary" value="Register" />
 
 </form>
-</body>
+</div>
 
+</body>
 </html>
