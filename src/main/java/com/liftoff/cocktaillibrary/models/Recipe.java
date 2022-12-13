@@ -1,25 +1,34 @@
 package com.liftoff.cocktaillibrary.models;
 
+import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@Entity
 public class Recipe extends AbstractEntity {
 
-    private List<Ingredient> ingredients;
+@ElementCollection(targetClass = IngredientAmount.class)
+@MapKeyClass(Ingredient.class)
+    private Map<Ingredient, IngredientAmount> recipeIngredients;
+
+@ManyToMany
     private List<Tag> tags;
 
     public Recipe (){};
 
-    public Recipe (List<Ingredient> ingredients, List<Tag> tags){
-        this.ingredients = ingredients;
+    public Recipe (Map<Ingredient, IngredientAmount> recipeIngredients, List<Tag> tags){
+        this.recipeIngredients = recipeIngredients;
         this.tags = tags;
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+
+    public Map<Ingredient, IngredientAmount> getRecipeIngredients() {
+        return recipeIngredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setRecipeIngredients(HashMap<Ingredient, IngredientAmount> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 
     public List<Tag> getTags() {

@@ -14,7 +14,8 @@ public class RecipeData {
         for (Recipe recipe : allRecipes){
             if (recipe.getName().toLowerCase().contains(searchTerm.toLowerCase())){
                 results.add(recipe);
-            }else if (recipe.getIngredients().toString().toLowerCase().contains(searchTerm.toLowerCase())) {
+            }else if (recipe.getRecipeIngredients().toString().toLowerCase().contains(searchTerm.toLowerCase())) {
+
                 results.add(recipe);
             }else if (recipe.getTags().toString().toLowerCase().contains(searchTerm.toLowerCase())){
                 results.add(recipe);
@@ -24,4 +25,15 @@ public class RecipeData {
         return results;
     }
 
+    public static ArrayList<Ingredient> findByType(String ingredientType, Iterable<Ingredient> allIngredients){
+        ArrayList<Ingredient> results = new ArrayList<>();
+
+        for (Ingredient ingredient: allIngredients){
+            if (ingredient.getIngredientType().toString().contains(ingredientType)){
+                results.add(ingredient);
+            }
+
+        }
+        return results;
+    }
 }
