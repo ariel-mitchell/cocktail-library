@@ -16,6 +16,23 @@
         <input type="submit"class="btn btn-primary" value="Search" />
     </form>
 
+    <table class="recipes">
+        <tr th:each="recipe : ${recipes}">
+            <td>
+
+                <p th:text="${'Name: ' + recipe.name}"></p>
+                <p>
+                    Ingredients:
+                <ul th:each="ingredients : ${recipe.ingredients}">
+                    <li>
+                        <a th:text="${ingredient}"></a>
+                    </li>
+                </ul>
+                </p>
+            </td>
+        </tr>
+    </table>
+
 </div>
 </body>
 </html>
