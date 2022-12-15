@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum IngredientAmount {
+        BARSPOON ("Barspoon"),
         QAURTERPART("Quarter Part"),
         HALFPART ("Half Part"),
         ONEPART ("One Part"),
