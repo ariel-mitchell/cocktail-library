@@ -3,6 +3,7 @@ package com.liftoff.cocktaillibrary.models;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +12,10 @@ public class Ingredient extends AbstractEntity {
 
     private  IngredientType ingredientType;
 
-    private IngredientAmount ingredientAmount;
+    @OneToMany(mappedBy = "ingredient")
+    private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "ingredients")
 
-    private List<Recipe> recipes = new ArrayList<>();
     public Ingredient(){};
     public Ingredient(IngredientType ingredientType){
         this.ingredientType=ingredientType;
@@ -23,7 +23,7 @@ public class Ingredient extends AbstractEntity {
 
     public Ingredient (IngredientType ingredientType, IngredientAmount ingredientAmount){
         this.ingredientType = ingredientType;
-        this.ingredientAmount= ingredientAmount;
+
     }
 
     public IngredientType getIngredientType() {

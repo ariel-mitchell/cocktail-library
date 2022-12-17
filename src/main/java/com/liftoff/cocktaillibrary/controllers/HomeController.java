@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liftoff.cocktaillibrary.models.*;
 import com.liftoff.cocktaillibrary.models.data.IngredientRepository;
+import com.liftoff.cocktaillibrary.models.data.RecipeIngredientRepository;
 import com.liftoff.cocktaillibrary.models.data.RecipeRepository;
 import com.liftoff.cocktaillibrary.models.data.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class HomeController {
 
     @Autowired
     private RecipeRepository recipeRepository;
+
+    @Autowired
+    private RecipeIngredientRepository recipeIngredientRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -67,10 +71,10 @@ public class HomeController {
 
     @PostMapping("add")
     public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
-                                    Errors errors, Model model, @RequestParam List<IngredientType> ingredientTypes, @RequestParam List<String> ingredientNames, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam List<Integer> tagIds) {
+                                    Errors errors, Model model, @RequestParam List<Integer> ingredientIds, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam List<Integer> tagIds) {
 
 
-        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Recipe");
@@ -79,16 +83,16 @@ public class HomeController {
         }else{
 
             List<Tag> tags = (List<Tag>) tagRepository.findAllById(tagIds);
+            List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAllById(ingredientIds);
 
 
 
-            for (int i=0; i<ingredientNames.size(); i++){
-                Ingredient ingredient = new Ingredient(ingredientTypes.get(i), ingredientAmounts.get(i));
-                ingredient.setName(ingredientNames.get(i));
-                ingredientRepository.save(ingredient);
-                ingredients.add(ingredient);
+            for (int i=0; i<ingredients.size(); i++){
+                RecipeIngredient recipeIngredient = new RecipeIngredient(ingredients.get(i), ingredientAmounts.get(i));
+                recipeIngredientRepository.save(recipeIngredient);
+                recipeIngredients.add(recipeIngredient);
             }
-            newRecipe.setIngredients(ingredients);
+            newRecipe.setRecipeIngredients(recipeIngredients);
             newRecipe.setTags(tags);
         }
         recipeRepository.save(newRecipe);

@@ -8,7 +8,7 @@ $(document).ready(function() {});
      let s;
      for (i=0;i<ingredients.length;i++) {
          if (ingredients[i].ingredientType == selectedType) {
-             s +=  '<option value="' + ingredients[i].name + '">'+ ingredients[i].name+ '</option>';
+             s +=  '<option value="' + ingredients[i].id + '">'+ ingredients[i].name+ '</option>';
          }
      }
      $(current).closest('.form-row').find('.ingredientName').html(s);

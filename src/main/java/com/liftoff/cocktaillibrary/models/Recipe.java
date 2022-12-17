@@ -15,7 +15,7 @@ public class Recipe extends AbstractEntity {
 
 @ElementCollection
 @ManyToMany
-private List<Ingredient> ingredients;
+private List<RecipeIngredient> recipeIngredients;
 
 
     @ManyToMany
@@ -24,18 +24,17 @@ private List<Ingredient> ingredients;
 
     public Recipe (){};
 
-    public Recipe (List<Ingredient> ingredients, List<Tag> tags){
-        this.ingredients = ingredients;
+    public Recipe(List<RecipeIngredient> recipeIngredients, List<Tag> tags) {
+        this.recipeIngredients = recipeIngredients;
         this.tags = tags;
     }
 
-
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    public List<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 
     public List<Tag> getTags() {
