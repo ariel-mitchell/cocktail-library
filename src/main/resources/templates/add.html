@@ -23,7 +23,7 @@
     <div class="form-row" id="ingredientForm">
 
                 <label th:for="ingredientType">Ingredient Type</label>
-                <select id="ingredientType" class="ingredientType" name="ingredientType" onchange="ingredientTypeSelected(this)">
+                <select id="ingredientType" class="ingredientType" name="ingredientTypes" onchange="ingredientTypeSelected(this)">
                     <option value="">Select Ingredient Type</option>
                     <option th:each="ingredientType : ${ingredientTypes}"
                             th:text="${ingredientType.displayName}"
@@ -32,12 +32,12 @@
 
 
                 <label th:for="ingredientName" >Ingredient Name</label>
-                <select id="ingredientName" class="ingredientName" name="ingredientName">
+                <select id="ingredientName" class="ingredientName" name="ingredientNames">
                     <option>Select Ingredient</option>
                 </select>
 
                 <label th:for="ingredientAmount">Ingredient Amount</label>
-                <select id="ingredientAmount" name="ingredientAmount">
+                <select id="ingredientAmount" name="ingredientAmounts">
                     <option value="">Select Ingredient Amount</option>
                     <option th:each="ingredientAmount : ${ingredientAmounts}"
                             th:text="${ingredientAmount.displayName}"
@@ -57,7 +57,7 @@
     <div class="form-group">
         <label th:for="tags">Tags</label>
         <th:block th:each="tag : ${tags}">
-            <input type="checkbox" name="tags" th:value="${tag.id}">
+            <input type="checkbox" name="tagIds" th:value="${tag.id}">
             <label th:text="${tag.name}"></label>
         </th:block>
         <a th:href="@{'/tags/add'}">Add Tag</a>

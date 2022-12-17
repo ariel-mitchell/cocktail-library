@@ -69,7 +69,7 @@ public class HomeController {
     public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
                                     Errors errors, Model model, @RequestParam List<IngredientType> ingredientTypes, @RequestParam List<String> ingredientNames, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam List<Integer> tagIds) {
 
-        Ingredient ingredient = new Ingredient();
+
         ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 
         if (errors.hasErrors()) {
@@ -82,13 +82,13 @@ public class HomeController {
 
 
 
-            for (IngredientType ingredientType: ingredientTypes){
-                ingredient.setIngredientType(ingredientType);
+            for (int i=0; i<ingredientNames.size(); i++){
+                Ingredient ingredient = new Ingredient(ingredientTypes.get(i), ingredientAmounts.get(i));
+                ingredient.setName(ingredientNames.get(i));
+                ingredientRepository.save(ingredient);
+                ingredients.add(ingredient);
             }
-            for
-
-
-
+            newRecipe.setIngredients(ingredients);
             newRecipe.setTags(tags);
         }
         recipeRepository.save(newRecipe);
