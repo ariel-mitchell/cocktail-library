@@ -23,7 +23,7 @@
     <div class="form-row" id="ingredientForm">
 
                 <label th:for="ingredientType">Ingredient Type</label>
-                <select id="ingredientType" class="ingredientType" onchange="ingredientTypeSelected(this)">
+                <select id="ingredientType" class="ingredientType" name="ingredientType" onchange="ingredientTypeSelected(this)">
                     <option value="">Select Ingredient Type</option>
                     <option th:each="ingredientType : ${ingredientTypes}"
                             th:text="${ingredientType.displayName}"
@@ -32,12 +32,12 @@
 
 
                 <label th:for="ingredientName" >Ingredient Name</label>
-                <select id="ingredientName" class="ingredientName">
+                <select id="ingredientName" class="ingredientName" name="ingredientName">
                     <option>Select Ingredient</option>
                 </select>
 
                 <label th:for="ingredientAmount">Ingredient Amount</label>
-                <select id="ingredientAmount">
+                <select id="ingredientAmount" name="ingredientAmount">
                     <option value="">Select Ingredient Amount</option>
                     <option th:each="ingredientAmount : ${ingredientAmounts}"
                             th:text="${ingredientAmount.displayName}"

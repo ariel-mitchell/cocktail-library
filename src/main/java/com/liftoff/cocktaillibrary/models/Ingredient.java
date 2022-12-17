@@ -9,19 +9,17 @@ import java.util.List;
 public class Ingredient extends AbstractEntity {
 
     private  IngredientType ingredientType;
-//    private  String ingredientAmount;
 
-
-
+    private IngredientAmount ingredientAmount;
     public Ingredient(){};
     public Ingredient(IngredientType ingredientType){
         this.ingredientType=ingredientType;
     }
 
-//    public Ingredient (IngredientType ingredientType, String ingredientAmount){
-//        this.ingredientType = ingredientType;
-//        this.ingredientAmount= ingredientAmount;
-//    }
+    public Ingredient (IngredientType ingredientType, IngredientAmount ingredientAmount){
+        this.ingredientType = ingredientType;
+        this.ingredientAmount= ingredientAmount;
+    }
 
     public IngredientType getIngredientType() {
         return ingredientType;

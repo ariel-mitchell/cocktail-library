@@ -45,42 +45,6 @@ public class HomeController {
         return "user/add-account";
     }
 
-//    public void dropdownManager(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        try (PrintWriter out = response.getWriter()) {
-//            String op = request.getParameter("operation");
-//            if (op.equals("ingredientType")) {
-//
-//                List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
-//                Gson json = new Gson();
-//                String ingTypeList = json.toJson(ingredientTypes);
-//                response.setContentType("text/html");
-//                response.getWriter().write(ingTypeList);
-//            } else if (op.equals("ingredient")) {
-//
-//
-//                model.addAttribute("ingredients", ingredientRepository.findAll());
-//                String ingredientType = request.getParameter("ingredientType");
-//                List<Ingredient> ingredients = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
-//                Gson json = new Gson();
-//                String ingredientTypeList = json.toJson(ingredients);
-//                response.setContentType("text/html");
-//                response.getWriter().write(ingredientTypeList);
-//            }
-//        }
-//
-//    }
-
-//    @GetMapping("getIngredientsByType")
-//    public @ResponseBody String getIngredientsByType(@RequestParam String ingredientType){
-//        String json = null;
-//        ArrayList<Ingredient> list = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
-//        try {
-//            json = new ObjectMapper().writeValueAsString(list);
-//        }catch (JsonProcessingException e){
-//            e.printStackTrace();
-//        }
-//        return json;
-//    }
 
     @GetMapping("add")
     public String displayCreateRecipeForm(Model model){
@@ -102,24 +66,29 @@ public class HomeController {
     }
 
     @PostMapping("add")
-    public String processAddJobForm(@ModelAttribute @Valid Recipe newRecipe,
-                                    Errors errors, Model model, @RequestParam List<Integer> ingredientIds, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam List<Integer> tagIds) {
+    public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
+                                    Errors errors, Model model, @RequestParam List<IngredientType> ingredientTypes, @RequestParam List<String> ingredientNames, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam List<Integer> tagIds) {
 
-         HashMap<Ingredient, IngredientAmount> recipeIngredients = new HashMap<>();
+        Ingredient ingredient = new Ingredient();
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Recipe");
             return "add";
 
         }else{
-            List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAllById(ingredientIds);
+
             List<Tag> tags = (List<Tag>) tagRepository.findAllById(tagIds);
 
-            for(int i = 0; i<ingredients.size(); i++){
-                recipeIngredients.put(ingredients.get(i), ingredientAmounts.get(i));
-            }
 
-            newRecipe.setRecipeIngredients(recipeIngredients);
+
+            for (IngredientType ingredientType: ingredientTypes){
+                ingredient.setIngredientType(ingredientType);
+            }
+            for
+
+
+
             newRecipe.setTags(tags);
         }
         recipeRepository.save(newRecipe);
