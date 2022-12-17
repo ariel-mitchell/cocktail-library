@@ -17,6 +17,7 @@ public class Recipe extends AbstractEntity {
 @ManyToMany
 private List<Ingredient> ingredients;
 
+
     @ManyToMany
     private List<Tag> tags;
 
