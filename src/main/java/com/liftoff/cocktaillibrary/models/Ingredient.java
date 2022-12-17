@@ -1,6 +1,7 @@
 package com.liftoff.cocktaillibrary.models;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,10 @@ public class Ingredient extends AbstractEntity {
     private  IngredientType ingredientType;
 
     private IngredientAmount ingredientAmount;
+
+    @ManyToMany(mappedBy = "ingredients")
+
+    private List<Recipe> recipes = new ArrayList<>();
     public Ingredient(){};
     public Ingredient(IngredientType ingredientType){
         this.ingredientType=ingredientType;

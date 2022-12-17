@@ -14,6 +14,7 @@ import java.util.Map;
 public class Recipe extends AbstractEntity {
 
 @ElementCollection
+@ManyToMany
 private List<Ingredient> ingredients;
 
     @ManyToMany

@@ -1,6 +1,7 @@
 package com.liftoff.cocktaillibrary.models;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class Tag extends AbstractEntity {
 //    }
 
     @ManyToMany(mappedBy="tags")
+
     private final List<Recipe> recipes = new ArrayList<>();
 
     public Tag(){};
