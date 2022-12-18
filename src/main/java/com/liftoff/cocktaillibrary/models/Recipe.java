@@ -24,6 +24,10 @@ private List<RecipeIngredient> recipeIngredients;
 
     public Recipe (){};
 
+    public Recipe (List<RecipeIngredient> recipeIngredients){
+        this.recipeIngredients=recipeIngredients;
+    }
+
     public Recipe(List<RecipeIngredient> recipeIngredients, List<Tag> tags) {
         this.recipeIngredients = recipeIngredients;
         this.tags = tags;

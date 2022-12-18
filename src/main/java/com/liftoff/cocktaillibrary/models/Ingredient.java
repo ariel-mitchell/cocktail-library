@@ -21,11 +21,6 @@ public class Ingredient extends AbstractEntity {
         this.ingredientType=ingredientType;
     }
 
-    public Ingredient (IngredientType ingredientType, IngredientAmount ingredientAmount){
-        this.ingredientType = ingredientType;
-
-    }
-
     public IngredientType getIngredientType() {
         return ingredientType;
     }

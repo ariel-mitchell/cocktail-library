@@ -71,7 +71,7 @@ public class HomeController {
 
     @PostMapping("add")
     public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
-                                    Errors errors, Model model, @RequestParam List<Integer> ingredientIds, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam List<Integer> tagIds) {
+                                    Errors errors, Model model, @RequestParam List<Integer> ingredientIds, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam(defaultValue = "") List<Integer> tagIds) {
 
 
         ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();

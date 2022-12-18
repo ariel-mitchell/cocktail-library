@@ -18,8 +18,8 @@
     </div>
 
     <div class="form-group">
-        <label th:for="name">Ingredient</label>
-        <input class="form-control" th:field="${ingredient.name}" />
+        <label th:for="ingredientName">Ingredient</label>
+        <input class="form-control" th:field="${ingredient.name}" name="ingredientName"/>
         <span th:errors="${ingredient.name}" class="error"></span>
     </div>
     <input type="submit" value="Add Ingredient" />
