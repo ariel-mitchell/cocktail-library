@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.ejb.DuplicateKeyException;
+import javax.management.Query;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("custom-ingredients")
@@ -38,12 +38,25 @@ public class CustomIngredientController {
     }
 
     @PostMapping("add")
-    public String processAddCustomIngredientForm(@ModelAttribute @Valid Ingredient newIngredient, Errors errors, Model model){
-        if (errors.hasErrors()){
-            return "custom-ingredients/add";
-        }else{
-            ingredientRepository.save(newIngredient);
-            return"redirect:../add";
+    public String processAddCustomIngredientForm(@ModelAttribute @Valid Ingredient newIngredient, Errors errors, Model model) {
+        String duplicateIngredient = new String();
+        List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
+        for (Ingredient ingredient : ingredients) {
+            if (ingredient.getName().toLowerCase() == newIngredient.getName().toLowerCase()) {
+                duplicateIngredient = ingredient.getName();
+//                errors.rejectValue();
+            }
         }
-    }
-}
+                if (errors.hasErrors()) {
+                    return "custom-ingredients/add";
+                } else if (duplicateIngredient == newIngredient.getName()) {
+                    return "custom-ingredients/add";
+                } else {
+                    ingredientRepository.save(newIngredient);
+
+                    return "redirect:../add";
+
+                }
+            }
+        }
+

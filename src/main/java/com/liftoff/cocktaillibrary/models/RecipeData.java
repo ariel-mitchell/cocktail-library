@@ -7,7 +7,7 @@ public class RecipeData {
 
     //Do we want the ability to search within specific fields or is the List going to take care of that part of filtering?
 
-    public static ArrayList<Recipe> searchWithKeyword(String searchTerm, Iterable<Recipe> allRecipes){
+    public static ArrayList<Recipe> findByKeyword(String searchTerm, Iterable<Recipe> allRecipes){
 
         ArrayList<Recipe> results = new ArrayList<>();
 

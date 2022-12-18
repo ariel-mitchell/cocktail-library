@@ -8,20 +8,25 @@
 <div class="container body-content">
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
     <h2 class="page-title">View Recipes By Category</h2>
+
 </div>
 
-<table class="centeredTable">
-    <tr>
-        <th>All</th>
-        <th>Spirit</th>
-        <th>Liqueur</th>
-        <th>Vermouth/Wine</th>
-        <th>Syrup</th>
-        <th>Juice</th>
-        <th>Mixer</th>
-        <th>Egg</th>
-        <th>Bitters</th>
+<table class="recipes">
+    <tr th:each="recipe : ${recipes}">
+        <td>
+
+            <p th:text="${'Name: ' + recipe.name}"></p>
+            <p>
+                Ingredients:
+            <ul th:each="ingredients : ${recipe.ingredients}">
+                <li>
+                    <a th:text="${ingredient}"></a>
+                </li>
+            </ul>
+            </p>
+        </td>
     </tr>
 </table>
+
 </body>
 </html>
