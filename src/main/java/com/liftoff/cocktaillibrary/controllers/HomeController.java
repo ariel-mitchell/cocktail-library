@@ -96,7 +96,7 @@ public class HomeController {
             newRecipe.setTags(tags);
         }
         recipeRepository.save(newRecipe);
-        return "redirect:";
+        return "list-recipes";
     }
 
 

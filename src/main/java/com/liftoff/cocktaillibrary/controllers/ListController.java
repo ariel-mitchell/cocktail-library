@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
@@ -34,20 +35,27 @@ public class ListController {
         listByChoices.put("tags", "Tags");
     }
 
-    @RequestMapping("")
+    @RequestMapping(method={RequestMethod.GET, RequestMethod.POST})
     public String list(Model model){
-        model.addAttribute("ingredients", RecipeData.findByType("spirit", ingredientRepository.findAll()));
+        model.addAttribute("title", "List Recipes");
+        model.addAttribute("listBy", "All Recipes");
+        model.addAttribute("spirits", RecipeData.findByType("spirit", ingredientRepository.findAll()));
         model.addAttribute("tags", tagRepository.findAll());
+        model.addAttribute("recipes", recipeRepository.findAll());
         return "list-recipes";
     }
 
-    @RequestMapping(value = "recipes")
+    @RequestMapping(value="results", method={RequestMethod.GET, RequestMethod.POST})
     public String listRecipes(Model model, @RequestParam String choice){
+        model.addAttribute("spirits", RecipeData.findByType("spirit", ingredientRepository.findAll()));
+        model.addAttribute("tags", tagRepository.findAll());
         Iterable<Recipe> recipes;
         if (choice.toLowerCase().equals("all")){
             recipes = recipeRepository.findAll();
+            model.addAttribute("listBy", "All Recipes");
         }else{
             recipes = RecipeData.findByKeyword(choice, recipeRepository.findAll());
+            model.addAttribute("listBy", "Recipes with " + choice);
         }
         model.addAttribute("recipes", recipes);
         return "list-recipes";
@@ -55,10 +63,6 @@ public class ListController {
 
 
 }
-
-
-
-
 
 
 
