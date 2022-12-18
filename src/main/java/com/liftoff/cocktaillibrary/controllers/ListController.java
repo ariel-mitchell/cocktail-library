@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.HashMap;
 
 @Controller
-@RequestMapping(value = "list")
+@RequestMapping(value = "list-recipes")
 public class ListController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class ListController {
     public String list(Model model){
         model.addAttribute("ingredients", RecipeData.findByType("spirit", ingredientRepository.findAll()));
         model.addAttribute("tags", tagRepository.findAll());
-        return "list";
+        return "list-recipes";
     }
 
     @RequestMapping(value = "recipes")
