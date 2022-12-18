@@ -16,21 +16,33 @@
         <th>Ingredient</th>
         <th>Tag</th>
     </tr>
-    <tr>
+    <tr >
         <td>
             <li>
-                <a th:href="@{/list/recipes(choice='All')}">View All</a>
+                <a th:href="@{/list-recipes/results(choice='All')}">View All</a>
             </li>
         </td>
         <td>
             <li th:each="ingredient : ${ingredients}">
-                <a th:href="@{/list/recipes(choice=ingredient)}" th:text="${ingredient.name}"></a>
+                <a th:href="@{/list-recipes/results(choice=${ingredient.name})}" th:text="${ingredient.name}"></a>
             </li>
         </td>
         <td>
             <li th:each="tag : ${tags}">
-                <a th:href="@{/list/recipes(choice=tag)}" th:text="${tag.name}"></a>
+                <a th:href="@{/list-recipes/results(choice=${tag.name})}" th:text="${tag.name}"></a>
             </li>
+        </td>
+    </tr>
+</table>
+
+<table class="recipes">
+    <tr th:each="recipe : ${recipes}">
+        <td>
+
+                <li>
+                    <a th:href="@{../display-recipe(recipeDisplayed=${recipe.name})}" th:text="${recipe.name}"></a>
+                </li>
+
         </td>
     </tr>
 </table>
@@ -41,15 +53,16 @@
 
             <p th:text="${'Name: ' + recipe.name}"></p>
             <p>
-                Spirits:
-            <ul th:each="ingredients : ${recipe.ingredients}">
+                Ingredients:
+            <ul th:each="ingredient : ${recipe.recipeIngredients}">
                 <li>
-                    <a th:text="${ingredient}"></a>
+                    <a th:text="${ingredient.ingredientAmount.displayName + ' ' + ingredient.ingredient.name}"></a>
                 </li>
             </ul>
             </p>
         </td>
     </tr>
 </table>
+
 </body>
 </html>

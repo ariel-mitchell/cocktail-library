@@ -99,12 +99,21 @@ public class HomeController {
         return "redirect:";
     }
 
+    @RequestMapping("display-recipe")
+    public String displayRecipe(Model model, @RequestParam String recipeDisplayed){
+        Iterable<Recipe> recipes;
+        recipes=RecipeData.findByKeyword(recipeDisplayed, recipeRepository.findAll());
+        model.addAttribute("recipes", recipes);
 
+        return "display-recipe";
+    }
 
     @PostMapping("add-account")
     public String processAddAccountForm(Model model) {
         return "redirect:";
     }
+
+
 }
 
 
