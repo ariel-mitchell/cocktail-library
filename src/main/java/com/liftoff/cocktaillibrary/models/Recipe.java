@@ -13,10 +13,10 @@ import java.util.Map;
 @Entity
 public class Recipe extends AbstractEntity {
 
+@ElementCollection
+@ManyToMany
+private List<RecipeIngredient> recipeIngredients;
 
-    @ElementCollection(targetClass = IngredientAmount.class)
-    @MapKeyClass(Ingredient.class)
-    private Map<Ingredient, IngredientAmount> recipeIngredients;
 
     @ManyToMany
     private List<Tag> tags;
@@ -24,17 +24,20 @@ public class Recipe extends AbstractEntity {
 
     public Recipe (){};
 
-    public Recipe (Map<Ingredient, IngredientAmount> recipeIngredients, List<Tag> tags){
+    public Recipe (List<RecipeIngredient> recipeIngredients){
+        this.recipeIngredients=recipeIngredients;
+    }
+
+    public Recipe(List<RecipeIngredient> recipeIngredients, List<Tag> tags) {
         this.recipeIngredients = recipeIngredients;
         this.tags = tags;
     }
 
-
-    public Map<Ingredient, IngredientAmount> getRecipeIngredients() {
+    public List<RecipeIngredient> getRecipeIngredients() {
         return recipeIngredients;
     }
 
-    public void setRecipeIngredients(HashMap<Ingredient, IngredientAmount> recipeIngredients) {
+    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
 

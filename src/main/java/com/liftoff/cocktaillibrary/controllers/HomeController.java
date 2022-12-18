@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liftoff.cocktaillibrary.models.*;
 import com.liftoff.cocktaillibrary.models.data.IngredientRepository;
+import com.liftoff.cocktaillibrary.models.data.RecipeIngredientRepository;
 import com.liftoff.cocktaillibrary.models.data.RecipeRepository;
 import com.liftoff.cocktaillibrary.models.data.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class HomeController {
     @Autowired
     private RecipeRepository recipeRepository;
 
+    @Autowired
+    private RecipeIngredientRepository recipeIngredientRepository;
+
     @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("title", "Recipes");
@@ -45,42 +49,6 @@ public class HomeController {
         return "user/add-account";
     }
 
-//    public void dropdownManager(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        try (PrintWriter out = response.getWriter()) {
-//            String op = request.getParameter("operation");
-//            if (op.equals("ingredientType")) {
-//
-//                List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
-//                Gson json = new Gson();
-//                String ingTypeList = json.toJson(ingredientTypes);
-//                response.setContentType("text/html");
-//                response.getWriter().write(ingTypeList);
-//            } else if (op.equals("ingredient")) {
-//
-//
-//                model.addAttribute("ingredients", ingredientRepository.findAll());
-//                String ingredientType = request.getParameter("ingredientType");
-//                List<Ingredient> ingredients = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
-//                Gson json = new Gson();
-//                String ingredientTypeList = json.toJson(ingredients);
-//                response.setContentType("text/html");
-//                response.getWriter().write(ingredientTypeList);
-//            }
-//        }
-//
-//    }
-
-//    @GetMapping("getIngredientsByType")
-//    public @ResponseBody String getIngredientsByType(@RequestParam String ingredientType){
-//        String json = null;
-//        ArrayList<Ingredient> list = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
-//        try {
-//            json = new ObjectMapper().writeValueAsString(list);
-//        }catch (JsonProcessingException e){
-//            e.printStackTrace();
-//        }
-//        return json;
-//    }
 
     @GetMapping("add")
     public String displayCreateRecipeForm(Model model){
@@ -102,23 +70,28 @@ public class HomeController {
     }
 
     @PostMapping("add")
-    public String processAddJobForm(@ModelAttribute @Valid Recipe newRecipe,
-                                    Errors errors, Model model, @RequestParam List<Integer> ingredientIds, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam List<Integer> tagIds) {
+    public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
+                                    Errors errors, Model model, @RequestParam List<Integer> ingredientIds, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam(defaultValue = "") List<Integer> tagIds) {
 
-         HashMap<Ingredient, IngredientAmount> recipeIngredients = new HashMap<>();
+
+        ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Recipe");
             return "add";
 
         }else{
-            List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAllById(ingredientIds);
+
             List<Tag> tags = (List<Tag>) tagRepository.findAllById(tagIds);
+            List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAllById(ingredientIds);
 
-            for(int i = 0; i<ingredients.size(); i++){
-                recipeIngredients.put(ingredients.get(i), ingredientAmounts.get(i));
+
+
+            for (int i=0; i<ingredients.size(); i++){
+                RecipeIngredient recipeIngredient = new RecipeIngredient(ingredients.get(i), ingredientAmounts.get(i));
+                recipeIngredientRepository.save(recipeIngredient);
+                recipeIngredients.add(recipeIngredient);
             }
-
             newRecipe.setRecipeIngredients(recipeIngredients);
             newRecipe.setTags(tags);
         }
