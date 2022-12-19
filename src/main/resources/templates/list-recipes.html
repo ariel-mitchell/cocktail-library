@@ -7,6 +7,7 @@
 
 <h1 th:text="${title}" class="page-title"></h1>
 
+<div>
 <table class="centeredTable">
     <tr>
         <th colspan="100%">View Recipes By Spirit</th>
@@ -15,30 +16,39 @@
         <td th:each="spirit : ${spirits}"><a th:href="@{/list-recipes/results(choice=${spirit.name})}" th:text="${spirit.name}"></a></td>
     </tr>
     <tr>
-        <th colspan="3">View Recipes By Tag</th>
+        <th colspan="100%">View Recipes By Tag</th>
     </tr>
     <tr>
-        <td colspan="3" align="center">
+        <td colspan="100%" align="center">
+<!--            <form action="https://twitter.com/">-->
+<!--                <button class="btn btn-danger btn-lg">Click</button>-->
+<!--            </form>-->
+
+
+        <form>
         <select id="tagId" name="tagId">
             <option th:each="tag : ${tags}"
                     th:text="${tag.name}"
                     th:value="${tag.name}">Select Tag</option>
         </select>
-<!--            <a th:href="@{'/list-recipes/results(choice=${tag.name})}">-->
-<!--                <button class="btn btn-primary">Go</button>-->
-<!--            </a>-->
+            <a th:href="@{'/list-recipes}">
+                <button class="btn btn-primary">Go</button>
+            </a>
+        </form>
         </td>
     </tr>
 </table>
+</div><br>
+<br>
 
+<div>
 <table class="centeredTable">
-    <caption th:text="${listBy}"></caption>
     <tr th:each="recipe : ${recipes}">
         <td th:text="${recipe.name}"></td>
-        <td><a th:href="@{/update}">Edit</a></td>
+        <td align="right"><a th:href="@{/update}">Edit</a></td>
     </tr>
 </table>
-
+</div>
 
 </body>
 </html>

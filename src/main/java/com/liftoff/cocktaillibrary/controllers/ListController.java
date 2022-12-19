@@ -52,10 +52,10 @@ public class ListController {
         Iterable<Recipe> recipes;
         if (choice.toLowerCase().equals("all")){
             recipes = recipeRepository.findAll();
-            model.addAttribute("listBy", "All Recipes");
+            model.addAttribute("title", "All Recipes");
         }else{
             recipes = RecipeData.findByKeyword(choice, recipeRepository.findAll());
-            model.addAttribute("listBy", "Recipes with " + choice);
+            model.addAttribute("title", "Recipes with " + choice);
         }
         model.addAttribute("recipes", recipes);
         return "list-recipes";

@@ -1,7 +1,7 @@
 .page-title {
     text-align: center;
     padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 25px;
 
 }
 
@@ -27,6 +27,7 @@ tr:nth-child(odd) {
 }
 
 .centeredTable {
+    width: 75%;
     margin-left: auto;
     margin-right: auto;
 }
