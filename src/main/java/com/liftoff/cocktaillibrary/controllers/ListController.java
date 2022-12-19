@@ -8,13 +8,10 @@ import com.liftoff.cocktaillibrary.models.data.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("list-recipes")
@@ -64,21 +61,22 @@ public class ListController {
         return "list-recipes";
     }
 
-//    @GetMapping("detail")
-//    public String displayEventDetails(@RequestParam Integer eventId, Model model) {
-//
-//        Optional<Event> result = eventRepository.findById(eventId);
-//
-//        if (result.isEmpty()) {
-//            model.addAttribute("title", "Invalid Event ID: " + eventId);
-//        } else {
-//            Event event = result.get();
-//            model.addAttribute("title", event.getName() + " Details");
-//            model.addAttribute("event", event);
-//            model.addAttribute("tags", event.getTags());
-//        }
-//
-//        return "events/detail";
+    @GetMapping("/{choice}")
+    public String displaySingleRecipeDetails(@PathVariable String choice, Model model) {
+
+        ArrayList<Recipe> result = RecipeData.findByKeyword(choice, recipeRepository.findAll());
+
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Recipe: " + choice);
+        } else {
+            Recipe recipe = result.get(0);
+            model.addAttribute("title", recipe.getName());
+            model.addAttribute("recipe", recipe);
+            model.addAttribute("ingredients", recipe.getRecipeIngredients());
+            model.addAttribute("tags", recipe.getTags());
+        }
+        return "view-recipe";
+    }
 
 
 }

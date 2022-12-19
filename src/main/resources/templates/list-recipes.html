@@ -27,7 +27,6 @@
                     th:text="${tag.name}"
                     th:value="${tag.name}"></option>
         </select>
-<!--            <a th:href="@{/search}"><button class="btn btn-primary">Go</button></a>-->
             <a id="chosenTagButton"></a>
         </td>
     </tr>
@@ -38,7 +37,7 @@
 <div>
 <table class="centeredTable">
     <tr th:each="recipe : ${recipes}">
-        <td th:text="${recipe.name}"></td>
+        <td><a th:href="'/list-recipes/' + ${recipe.name}" th:text="${recipe.name}"></a></td>
         <td align="right"><a th:href="@{/update}">Edit</a></td>
     </tr>
 </table>

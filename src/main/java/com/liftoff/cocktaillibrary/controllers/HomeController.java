@@ -1,7 +1,5 @@
 package com.liftoff.cocktaillibrary.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liftoff.cocktaillibrary.models.*;
 import com.liftoff.cocktaillibrary.models.data.IngredientRepository;
 import com.liftoff.cocktaillibrary.models.data.RecipeIngredientRepository;
@@ -57,31 +55,20 @@ public class HomeController {
         model.addAttribute("ingredientAmounts", ingredientAmounts);
         model.addAttribute(new Recipe());
 
-//        @RequestParam(required = false, name="ingredientType") IngredientType ingredientType)
-//        List<Ingredient> ingredients = RecipeData.findByType(ingredientType, ingredientRepository.findAll());
-//        model.addAttribute("ingredients",ingredients);
-
         return "add";
     }
 
     @PostMapping("add")
     public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
                                     Errors errors, Model model, @RequestParam List<Integer> ingredientIds, @RequestParam List<IngredientAmount> ingredientAmounts, @RequestParam(defaultValue = "") List<Integer> tagIds) {
-
-
         ArrayList<RecipeIngredient> recipeIngredients = new ArrayList<RecipeIngredient>();
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Recipe");
             return "add";
-
-        }else{
-
+        } else {
             List<Tag> tags = (List<Tag>) tagRepository.findAllById(tagIds);
             List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAllById(ingredientIds);
-
-
-
             for (int i=0; i<ingredients.size(); i++){
                 RecipeIngredient recipeIngredient = new RecipeIngredient(ingredients.get(i), ingredientAmounts.get(i));
                 recipeIngredientRepository.save(recipeIngredient);
@@ -91,10 +78,8 @@ public class HomeController {
             newRecipe.setTags(tags);
         }
         recipeRepository.save(newRecipe);
-        return "list-recipes";
+        return "redirect:list-recipes";
     }
-
-
 
     @PostMapping("add-account")
     public String processAddAccountForm(Model model) {

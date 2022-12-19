@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
-<body>
+<head th:replace="fragments :: head"></head>
+
+<script  th:inline="javascript"> let ingredients = /*[[${ingredients}]]*/ 'ingredients'; </script>
+
+<body class="container">
+
+<div th:replace="fragments :: page-header"></div>
+
+<h1 th:text="${title}" class="page-title"></h1>
+
+<div class="recipe">
+    <h3>Ingredients</h3>
+    <ul>
+        <li th:each="ingredient : ${ingredients}" th:text="${ingredient.ingredientAmount.displayName} + ' ' + ${ingredient.ingredient.name}"></li>
+    </ul><br>
+    <br>
+    <h3>Tags</h3>
+    <td th:each="tag : ${tags}"><a th:href="@{/list-recipes/results(choice=${tag.name})}" th:text="'#' + ${tag.name}"></a></td>
+</div>
 
 </body>
 </html>

@@ -19,7 +19,8 @@
 
     <table class="centeredTable">
         <tr th:each="recipe : ${recipes}">
-            <td th:text="${recipe.name}"></td>
+            <td><a th:href="'/list-recipes/' + ${recipe.name}" th:text="${recipe.name}"></a></td>
+            <td align="right"><a th:href="@{/update}">Edit</a></td>
         </tr>
     </table>
 </div>
