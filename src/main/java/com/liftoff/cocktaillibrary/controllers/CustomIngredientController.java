@@ -41,6 +41,7 @@ public class CustomIngredientController {
     public String processAddCustomIngredientForm(@ModelAttribute @Valid Ingredient newIngredient, Errors errors, Model model) {
         String duplicateIngredient = new String();
         List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
+        List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
         for (Ingredient ingredient : ingredients) {
             if (ingredient.getName().toLowerCase() == newIngredient.getName().toLowerCase()) {
                 duplicateIngredient = ingredient.getName();
@@ -48,6 +49,7 @@ public class CustomIngredientController {
             }
         }
                 if (errors.hasErrors()) {
+                    model.addAttribute("ingredientTypes", ingredientTypes);
                     return "custom-ingredients/add";
                 } else if (duplicateIngredient == newIngredient.getName()) {
                     return "custom-ingredients/add";

@@ -13,6 +13,7 @@
         <th colspan="100%">View Recipes By Spirit</th>
     </tr>
     <tr>
+        <td><a th:href="@{/list-recipes/results(choice=all)}">All</a></td>
         <td th:each="spirit : ${spirits}"><a th:href="@{/list-recipes/results(choice=${spirit.name})}" th:text="${spirit.name}"></a></td>
     </tr>
     <tr>

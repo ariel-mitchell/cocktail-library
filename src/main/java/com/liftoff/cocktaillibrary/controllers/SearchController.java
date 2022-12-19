@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 @Controller
 @RequestMapping("search")
 public class SearchController {
@@ -26,15 +29,20 @@ public class SearchController {
 
     }
 
-    @PostMapping("results")
+    @PostMapping("")
     public String displayResults(Model model, @RequestParam String searchTerm){
-        Iterable<Recipe> recipes;
-        if (searchTerm.equals("") || searchTerm.toLowerCase().equals("all")){
-            recipes=recipeRepository.findAll();
-        }else{
-            recipes= RecipeData.findByKeyword(searchTerm, recipeRepository.findAll());
+        if (searchTerm == "" || searchTerm.toLowerCase().equals("all")) {
+            model.addAttribute("title", "All Recipes");
+            model.addAttribute("recipes", recipeRepository.findAll());
+        } else {
+            ArrayList<Recipe> result = RecipeData.findByKeyword(searchTerm, recipeRepository.findAll());
+            if (result.isEmpty()) {
+                model.addAttribute("title", "No recipes matching search term: " + searchTerm);
+            } else {
+                model.addAttribute("title", "Recipes Matching '" + searchTerm + "':");
+                model.addAttribute("recipes", RecipeData.findByKeyword(searchTerm, recipeRepository.findAll()));
+            }
         }
-        model.addAttribute("recipes", recipes);
         return "search";
     }
 

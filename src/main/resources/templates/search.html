@@ -13,26 +13,16 @@
             <input class="form-control" type="text" name="searchTerm" id="searchTerm" />
         </div>
 
-        <input type="submit"class="btn btn-primary" value="Search" />
-    </form>
+        <input type="submit" class="btn btn-primary" value="Search" />
+    </form><br>
+    <br>
 
-    <table class="recipes">
+    <table class="centeredTable">
         <tr th:each="recipe : ${recipes}">
-            <td>
-
-                <p th:text="${'Name: ' + recipe.name}"></p>
-                <p>
-                    Ingredients:
-                <ul th:each="ingredients : ${recipe.ingredients}">
-                    <li>
-                        <a th:text="${ingredient}"></a>
-                    </li>
-                </ul>
-                </p>
-            </td>
+            <td th:text="${recipe.name}"></td>
         </tr>
     </table>
-
 </div>
+
 </body>
 </html>
