@@ -8,7 +8,11 @@ import com.liftoff.cocktaillibrary.models.data.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +48,7 @@ public class ListController {
         return "list-recipes";
     }
 
-    @RequestMapping(value = "results", method={RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="results", method={RequestMethod.GET, RequestMethod.POST})
     public String listRecipes(Model model, @RequestParam String choice){
         model.addAttribute("spirits", RecipeData.findByType("spirit", ingredientRepository.findAll()));
         model.addAttribute("tags", tagRepository.findAll());
@@ -77,6 +81,7 @@ public class ListController {
         }
         return "view-recipe";
     }
+
 
 
 }
