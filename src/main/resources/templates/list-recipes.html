@@ -19,22 +19,15 @@
         <th colspan="100%">View Recipes By Tag</th>
     </tr>
     <tr>
-        <td colspan="100%" align="center">
-<!--            <form action="https://twitter.com/">-->
-<!--                <button class="btn btn-danger btn-lg">Click</button>-->
-<!--            </form>-->
-
-
-        <form>
-        <select id="tagId" name="tagId">
+        <td colspan="100%" align="center" class="chooseTag">
+        <select id="tagId" name="tagId" onchange="listByTag(this)">
+            <option value="">Select Tag</option>
             <option th:each="tag : ${tags}"
                     th:text="${tag.name}"
-                    th:value="${tag.name}">Select Tag</option>
+                    th:value="${tag.name}"></option>
         </select>
-            <a th:href="@{'/list-recipes}">
-                <button class="btn btn-primary">Go</button>
-            </a>
-        </form>
+<!--            <a th:href="@{/search}"><button class="btn btn-primary">Go</button></a>-->
+            <a id="chosenTagButton"></a>
         </td>
     </tr>
 </table>
