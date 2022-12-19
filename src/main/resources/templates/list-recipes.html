@@ -5,64 +5,43 @@
 <body class="container">
 <div th:replace="fragments :: page-header"></div>
 
-<div class="container body-content">
-    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
-    <h2 class="page-title">View Recipes By Category</h2>
-</div>
+<h1 th:text="${title}" class="page-title"></h1>
 
+<div>
 <table class="centeredTable">
     <tr>
-        <th>All</th>
-        <th>Ingredient</th>
-        <th>Tag</th>
+        <th colspan="100%">View Recipes By Spirit</th>
     </tr>
-    <tr >
-        <td>
-            <li>
-                <a th:href="@{/list-recipes/results(choice='All')}">View All</a>
-            </li>
-        </td>
-        <td>
-            <li th:each="ingredient : ${ingredients}">
-                <a th:href="@{/list-recipes/results(choice=${ingredient.name})}" th:text="${ingredient.name}"></a>
-            </li>
-        </td>
-        <td>
-            <li th:each="tag : ${tags}">
-                <a th:href="@{/list-recipes/results(choice=${tag.name})}" th:text="${tag.name}"></a>
-            </li>
+    <tr>
+        <td><a th:href="@{/list-recipes/results(choice=all)}">All</a></td>
+        <td th:each="spirit : ${spirits}"><a th:href="@{/list-recipes/results(choice=${spirit.name})}" th:text="${spirit.name}"></a></td>
+    </tr>
+    <tr>
+        <th colspan="100%">View Recipes By Tag</th>
+    </tr>
+    <tr>
+        <td colspan="100%" align="center" class="chooseTag">
+        <select id="tagId" name="tagId" onchange="listByTag(this)">
+            <option value="">Select Tag</option>
+            <option th:each="tag : ${tags}"
+                    th:text="${tag.name}"
+                    th:value="${tag.name}"></option>
+        </select>
+            <a id="chosenTagButton"></a>
         </td>
     </tr>
 </table>
+</div><br>
+<br>
 
-<table class="recipes">
+<div>
+<table class="centeredTable">
     <tr th:each="recipe : ${recipes}">
-        <td>
-
-                <li>
-                    <a th:href="@{../display-recipe(recipeDisplayed=${recipe.name})}" th:text="${recipe.name}"></a>
-                </li>
-
-        </td>
+        <td><a th:href="'/list-recipes/' + ${recipe.name}" th:text="${recipe.name}"></a></td>
+        <td align="right"><a th:href="@{/update}">Edit</a></td>
     </tr>
 </table>
-
-<table class="recipes">
-    <tr th:each="recipe : ${recipes}">
-        <td>
-
-            <p th:text="${'Name: ' + recipe.name}"></p>
-            <p>
-                Ingredients:
-            <ul th:each="ingredient : ${recipe.recipeIngredients}">
-                <li>
-                    <a th:text="${ingredient.ingredientAmount.displayName + ' ' + ingredient.ingredient.name}"></a>
-                </li>
-            </ul>
-            </p>
-        </td>
-    </tr>
-</table>
+</div>
 
 </body>
 </html>

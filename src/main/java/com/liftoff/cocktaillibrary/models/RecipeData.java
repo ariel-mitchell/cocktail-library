@@ -19,9 +19,9 @@ public class RecipeData {
             }
             if (ingredientNames.contains(searchTerm.toLowerCase())) {
                 results.add(recipe);
-            }else if (recipe.getName().toLowerCase().equals(searchTerm.toLowerCase())){
-                    results.add(recipe);
-            }else if (recipe.getTags().toString().toLowerCase().contains(searchTerm.toLowerCase())){
+            } else if (recipe.getName().toLowerCase().equals(searchTerm.toLowerCase())){
+                results.add(recipe);
+            } else if (recipe.getTags().toString().toLowerCase().contains(searchTerm.toLowerCase())){
                 results.add(recipe);
 
             }
