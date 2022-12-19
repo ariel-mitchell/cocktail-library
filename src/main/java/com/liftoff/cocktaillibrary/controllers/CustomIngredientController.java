@@ -32,33 +32,34 @@ public class CustomIngredientController {
     @GetMapping("add")
     public String displayAddCustomIngredientForm(Model model){
         List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
+        model.addAttribute("title", "Add A New Ingredient");
         model.addAttribute("ingredientTypes", ingredientTypes);
         model.addAttribute(new Ingredient());
         return "custom-ingredients/add";
     }
 
     @PostMapping("add")
-    public String processAddCustomIngredientForm(@ModelAttribute @Valid Ingredient newIngredient, Errors errors, Model model) {
-        String duplicateIngredient = new String();
-        List<Ingredient> ingredients = (List<Ingredient>) ingredientRepository.findAll();
+    public String processAddCustomIngredientForm(@ModelAttribute @Valid Ingredient newIngredient, Errors errors, Model model){
+        List<Ingredient> currentIngredients = (List<Ingredient>) ingredientRepository.findAll();
         List<IngredientType> ingredientTypes = Arrays.asList(IngredientType.values());
-        for (Ingredient ingredient : ingredients) {
-            if (ingredient.getName().toLowerCase() == newIngredient.getName().toLowerCase()) {
-                duplicateIngredient = ingredient.getName();
-//                errors.rejectValue();
+
+        if (errors.hasErrors()) {
+            model.addAttribute("ingredientTypes", ingredientTypes);
+            model.addAttribute("title", "Add A New Ingredient");
+            return "/custom-ingredients/add";
+        }
+
+        for (int i=0; i<currentIngredients.size(); i++) {
+            if (currentIngredients.get(i).getName().contains(newIngredient.getName())) {
+                model.addAttribute("title", "Ingredient Already Exists");
+                model.addAttribute("ingredientTypes", ingredientTypes);
+                return "custom-ingredients/add";
             }
         }
-                if (errors.hasErrors()) {
-                    model.addAttribute("ingredientTypes", ingredientTypes);
-                    return "custom-ingredients/add";
-                } else if (duplicateIngredient == newIngredient.getName()) {
-                    return "custom-ingredients/add";
-                } else {
-                    ingredientRepository.save(newIngredient);
 
-                    return "redirect:../add";
+        ingredientRepository.save(newIngredient);
+        return"redirect:../add";
+    }
 
-                }
-            }
-        }
+}
 
