@@ -27,7 +27,7 @@ public class SearchController {
 
     }
 
-    @PostMapping("")
+    @PostMapping(value = "results")
     public String displayResults(Model model, @RequestParam String searchTerm){
         if (searchTerm == "" || searchTerm.toLowerCase().equals("all")) {
             model.addAttribute("title", "All Recipes");
