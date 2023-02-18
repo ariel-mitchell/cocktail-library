@@ -13,3 +13,10 @@ $(document).ready(function() {});
      }
      $(current).closest('.form-row').find('.ingredientName').html(s);
    }
+
+    function listByTag(current) {
+     let selectedTag = $(current).val();
+     let s = '<a href="/list-recipes/results?choice=' +selectedTag+ '"><button class="btn btn-primary">Go</button></a>';
+
+     $(current).closest('.chooseTag').find('#chosenTagButton').html(s);
+    }

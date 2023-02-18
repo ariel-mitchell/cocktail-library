@@ -13,14 +13,12 @@ import java.util.Map;
 @Entity
 public class Recipe extends AbstractEntity {
 
-@ElementCollection
-@ManyToMany
-private List<RecipeIngredient> recipeIngredients;
-
+    @ElementCollection
+    @ManyToMany
+    private List<RecipeIngredient> recipeIngredients;
 
     @ManyToMany
     private List<Tag> tags;
-
 
     public Recipe (){};
 

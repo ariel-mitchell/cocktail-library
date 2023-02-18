@@ -5,23 +5,43 @@
 <body class="container">
 <div th:replace="fragments :: page-header"></div>
 
-<div class="container body-content">
-    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
-    <h2 class="page-title">View Recipes By Category</h2>
-</div>
+<h1 th:text="${title}" class="page-title"></h1>
 
+<div>
 <table class="centeredTable">
     <tr>
-        <th>All</th>
-        <th>Spirit</th>
-        <th>Liqueur</th>
-        <th>Vermouth/Wine</th>
-        <th>Syrup</th>
-        <th>Juice</th>
-        <th>Mixer</th>
-        <th>Egg</th>
-        <th>Bitters</th>
+        <th colspan="100%">View Recipes By Spirit</th>
+    </tr>
+    <tr>
+        <td><a th:href="@{/list-recipes/results(choice=all)}">All</a></td>
+        <td th:each="spirit : ${spirits}"><a th:href="@{/list-recipes/results(choice=${spirit.name})}" th:text="${spirit.name}"></a></td>
+    </tr>
+    <tr>
+        <th colspan="100%">View Recipes By Tag</th>
+    </tr>
+    <tr>
+        <td colspan="100%" align="center" class="chooseTag">
+        <select id="tagId" name="tagId" onchange="listByTag(this)">
+            <option value="">Select Tag</option>
+            <option th:each="tag : ${tags}"
+                    th:text="${tag.name}"
+                    th:value="${tag.name}"></option>
+        </select>
+            <a id="chosenTagButton"></a>
+        </td>
     </tr>
 </table>
+</div><br>
+<br>
+
+<div>
+<table class="centeredTable">
+    <tr th:each="recipe : ${recipes}">
+        <td><a th:href="'/list-recipes/' + ${recipe.name}" th:text="${recipe.name}"></a></td>
+        <td align="right"><a th:href="@{/update}">Edit</a></td>
+    </tr>
+</table>
+</div>
+
 </body>
 </html>
